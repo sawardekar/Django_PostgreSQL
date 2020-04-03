@@ -6,8 +6,9 @@ from employee.models import EmployeeType, Product
 # Create your views here.
 
 
-def index(requests):
-    return HttpResponse("Successfully created Employee app")
+def index(request):
+    # return HttpResponse("Successfully created Employee app")
+    return render(request, 'employee/home.html')
 
 
 class EmployeeTypeViewSet(viewsets.ModelViewSet):
