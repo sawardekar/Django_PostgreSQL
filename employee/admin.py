@@ -5,5 +5,3 @@ from employee.models import Employee, EmployeeType, Product
 admin.site.register(Employee)
 admin.site.register(EmployeeType)
 admin.site.register(Product)
-
-#testing

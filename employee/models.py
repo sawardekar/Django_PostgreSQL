@@ -3,7 +3,7 @@ from django.utils.timezone import now
 from django.contrib.postgres.fields import ArrayField, JSONField
 # Create your models here.
 
-gender_status = (
+GENDER_STATUS = (
     ('Male','Male'),
     ('Female','Female')
 )
@@ -14,7 +14,7 @@ class Employee(models.Model):
     name = models.CharField(max_length=500, blank=True, null=True, unique=True)
     address = models.CharField(max_length=500, blank=True, null=True, unique=True)
     email = models.CharField(max_length=500, blank=True, null=True, unique=True)
-    gender = models.TextField(choices=gender_status, default='', blank=True, null=True)
+    gender = models.TextField(choices=GENDER_STATUS, default='', blank=True, null=True)
     age = models.IntegerField(blank=True, null=True)
     mobile = models.BigIntegerField(unique=True, blank=True, null=True)
     status = models.NullBooleanField(default=True)
