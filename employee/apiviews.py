@@ -8,11 +8,14 @@ from employee.serializers import EmployeeSerializer
 
 
 class EmployeeDetail(APIView):
+    """
+    Serializers define the API representation.
+    """
     parser_class = (FileUploadParser,)
 
     def get_object(self, pk):
         try:
-            return Employee.objects.get(pk=pk)
+            return Employee.objects.select_related('type').prefetch_related('product').get(pk=pk)
         except Employee.DoesNotExist:
             raise Http404
 
@@ -21,7 +24,7 @@ class EmployeeDetail(APIView):
             employee = self.get_object(pk)
             serializer = EmployeeSerializer(employee)
         else:
-            employee = Employee.objects.all()
+            employee = Employee.objects.all().select_related('type').prefetch_related('product')
             serializer = EmployeeSerializer(employee, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 

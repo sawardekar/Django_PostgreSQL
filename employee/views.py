@@ -13,6 +13,7 @@ def index(request):
 
 class EmployeeTypeViewSet(viewsets.ModelViewSet):
     """
+    ViewSets define the view behavior.
     API endpoint that allows EmployeeType to be viewed or edited.
     """
     lookup_field = 'id'
@@ -24,6 +25,7 @@ class EmployeeTypeViewSet(viewsets.ModelViewSet):
 
 class ProductViewSet(viewsets.ModelViewSet):
     """
+    ViewSets define the view behavior.
     API endpoint that allows Product to be viewed or edited.
     """
     lookup_field = 'id'
