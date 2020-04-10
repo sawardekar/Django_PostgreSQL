@@ -39,9 +39,9 @@ class EmployeeSerializer(serializers.ModelSerializer):
     credit = serializers.FloatField(required=False)
     created_at = serializers.DateTimeField(required=False)
     # type = EmployeeTypeSerializer(required=False)
-    type = serializers.SlugRelatedField(required=False, slug_field='name', read_only=True)
+    type = serializers.SlugRelatedField(required=False, slug_field='name', allow_null=True, queryset=EmployeeType.objects.all())
     # product = ProductSerializer(required=False, many=True)
-    product = serializers.SlugRelatedField(required=False, slug_field='name', read_only=True, many=True)
+    product = serializers.SlugRelatedField(required=False, slug_field='name', queryset=Product.objects.all(), many=True)
     meta_data = JSONSerializerField(required=False)
     production_user = serializers.ListField(child=serializers.CharField(), required=False)
 
