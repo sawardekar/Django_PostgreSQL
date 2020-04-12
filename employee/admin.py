@@ -22,11 +22,12 @@ class EmployeeAdmin(admin.ModelAdmin):
     # readonly_fields = ('age',)  # list of fields as readonly [NonEditable fields]
     sortable_by = 'id'  # field 'id' sorted by descending order
     date_hierarchy = 'created_at'  # field 'created_at' as date field display as descending order
-    search_fields = ['name', 'address', 'gender']  # list of fields search in admin table
-    list_display = ('image_tag', 'name', 'address','email','gender','age','mobile','type','get_products','display_age') # list of fields display in admin table
+    search_fields = ['name', 'address', 'product__name','production_user']  # list of fields search in admin table
+    list_display = ('image_tag', 'name', 'address','email','gender','production_user','mobile','type','get_products','age','display_age') # list of fields display in admin table
     list_display_links = ('name', 'address')  # list of fields display in table show as link
-    list_select_related = ('type',)  # select_related in added only foreign key fields for query performance
-    list_filter = ('name',)  # list of fields filter in admin table
+    # list_select_related = ('type',)  # select_related in added only foreign key fields for query performance
+    # raw_id_fields = ('product','type') # perfetch_related in added only manytomany fields for query performance
+    list_filter = ('type',)  # list of fields filter in admin table
     list_editable = ('age',)  # list of fields editable in admin table
     filter_vertical = ('product',)  # filter vertical in added only manytomany fields for filter will displayed
     actions = [update_gender_all]  # admin action function called
@@ -60,6 +61,13 @@ class EmployeeAdmin(admin.ModelAdmin):
         return format_html(
             f'<span style="font-size : {display_size}px;">{obj.age}</span>'
         )
+
+    # admin default queryset function inherited
+    def get_queryset(self, request):
+        emp_model_qs = super(EmployeeAdmin, self).get_queryset(request)
+        emp_model_qs = emp_model_qs.select_related('type').prefetch_related('product')
+        return emp_model_qs
+
 
 # unregister app
 admin.site.unregister(Group)
