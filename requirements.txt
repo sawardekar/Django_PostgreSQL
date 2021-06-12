@@ -5,7 +5,7 @@ chardet==3.0.4
 Click==7.0
 dataclasses==0.6
 Django==2.2.24
-django-debug-toolbar==2.2
+django-debug-toolbar==2.2.1
 django-mongoengine==0.4.1
 django-rest-framework-mongoengine==3.4.1
 django-suit==2.0a1
