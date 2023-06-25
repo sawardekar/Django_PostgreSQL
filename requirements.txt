@@ -29,4 +29,4 @@ requests==2.23.0
 six==1.14.0
 sqlparse==0.2.4
 urllib3==1.25.8
-Werkzeug==1.0.0
+Werkzeug==2.2.3
